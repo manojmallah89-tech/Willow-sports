@@ -3,61 +3,64 @@
 <head>  
   <meta charset="UTF-8">  
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>  
-  <title>Cricket Yoddha | Elite Mini</title>     
+  <title>Cricket Yoddha | Premium Ultra Mini</title>     
   <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/shaka-player.ui.min.js" crossorigin="anonymous"></script>  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/controls.min.css" crossorigin="anonymous">  
   <style>  
     * { margin: 0; padding: 0; box-sizing: border-box; }  
-    body { background: #000; height: 100vh; overflow: hidden; font-family: 'Inter', sans-serif; }
+    body { background: #000; height: 100vh; overflow: hidden; font-family: 'Inter', -apple-system, sans-serif; }
 
     .shaka-video-container { position: relative; width: 100%; height: 100%; }
     video { width: 100%; height: 100%; object-fit: contain; }
 
-    /* --- ELITE MINI PROFESSIONAL TICKER --- */
-    .elite-mini-ticker {
+    /* --- PREMIUM METALLIC MINI BADGE --- */
+    .premium-mini-tab {
       position: absolute;
-      top: 12px; 
+      top: 8px; 
       left: 50%;
       transform: translateX(-50%);
-      width: 60%; /* काफी छोटा और कॉम्पैक्ट */
-      max-width: 280px; 
-      background: linear-gradient(90deg, #FFD700, #FACC15); /* प्रीमियम गोल्ड */
-      height: 20px; /* बहुत पतली और क्लासी */
+      width: 55%; 
+      max-width: 240px; 
+      background: linear-gradient(180deg, #FFD700 0%, #E6B800 100%); /* धात्विक गोल्ड फिनिश */
+      height: 18px; 
       border-radius: 2px;
       display: flex;
       align-items: center;
       overflow: hidden;
       z-index: 100;
-      border: 1px solid #000;
-      box-shadow: 0 4px 15px rgba(250, 204, 21, 0.4);
+      border: 1px solid #000000;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.5);
       pointer-events: none;
     }
 
-    /* चमकता हुआ प्रीमियम इफेक्ट */
-    .elite-mini-ticker::after {
+    /* प्रीमियम शाइन इफ़ेक्ट */
+    .premium-mini-tab::after {
       content: "";
       position: absolute;
-      top: 0; left: -100%;
+      top: 0; left: -150%;
       width: 40%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
-      animation: shine 2.5s infinite;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+      animation: premium-flash 3s infinite ease-in-out;
     }
 
-    @keyframes shine { to { left: 200%; } }
+    @keyframes premium-flash { to { left: 250%; } }
 
-    .ticker-content {
+    /* --- PREMIUM TEXT STYLING --- */
+    .premium-text {
       display: inline-block;
       white-space: nowrap;
       padding-left: 100%;
-      animation: scroll-mini 8s linear infinite; /* थोड़ी तेज स्पीड ताकि छोटा टेक्स्ट जल्दी दिखे */
-      color: #000; 
-      font-size: 9.5px; 
+      animation: scroll-premium 8s linear infinite; 
+      color: #000000; 
+      font-size: 9px; 
       font-weight: 900; 
-      letter-spacing: 0.5px;
+      letter-spacing: 1px; /* प्रीमियम स्पेसिंग */
       text-transform: uppercase;
+      /* टेक्स्ट को और साफ़ दिखाने के लिए हल्की शैडो */
+      text-shadow: 0.5px 0.5px 0px rgba(255, 255, 255, 0.2);
     }
 
-    @keyframes scroll-mini {
+    @keyframes scroll-premium {
       0% { transform: translateX(0); }
       100% { transform: translateX(-100%); }
     }
@@ -70,10 +73,9 @@
 
   <div class="shaka-video-container" data-shaka-player id="video-container">  
     
-    <div class="elite-mini-ticker">
-      <div class="ticker-content">
-        WATCH MATCHES 100% FREE 🏏🔥
-SEARCH CRICKET YODDHA ON TELEGRAM & JOIN NOW 📲🚀
+    <div class="premium-mini-tab">
+      <div class="premium-text">
+        SHARE LINK 🔗 | JOIN TELEGRAM 📲 | CRICKET YODDHA LIVE HD 🏏
       </div>
     </div>
 
