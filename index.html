@@ -1,125 +1,105 @@
 <!DOCTYPE html>  
-<html>  
+<html lang="en">  
 <head>  
   <meta charset="UTF-8">  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-  <title>Prime By Cricket Yoddha</title>     
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>  
+  <title>Cricket Yoddha | Elite Mini</title>     
   <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/shaka-player.ui.min.js" crossorigin="anonymous"></script>  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.11/controls.min.css" crossorigin="anonymous">  
   <style>  
-   * { margin: 0; padding: 0; box-sizing: border-box; }  
-    html, body {  
-      background: #000;  
-      height: 100vh;  
-      width: 100vw;  
-      overflow: hidden;  
-      font-family: system-ui, -apple-system, sans-serif;  
-    }  
-    .shaka-video-container {  
-      position: absolute;  
-      inset: 0;  
-      width: 100%;  
-      height: 100%;  
-    }  
-    video {  
-      width: 100%;  
-      height: 100%;  
-      background: #000;  
-      object-fit: contain;  
-    }  
-    /* Shaka Spinner Hiding */
-    .shaka-spinner-container,  
-    .shaka-spinner,  
-    .shaka-spinner-svg {  
-      display: none !important;  
-      visibility: hidden !important;  
-      opacity: 0 !important;  
-    }  
+    * { margin: 0; padding: 0; box-sizing: border-box; }  
+    body { background: #000; height: 100vh; overflow: hidden; font-family: 'Inter', sans-serif; }
+
+    .shaka-video-container { position: relative; width: 100%; height: 100%; }
+    video { width: 100%; height: 100%; object-fit: contain; }
+
+    /* --- ELITE MINI PROFESSIONAL TICKER --- */
+    .elite-mini-ticker {
+      position: absolute;
+      top: 12px; 
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%; /* काफी छोटा और कॉम्पैक्ट */
+      max-width: 280px; 
+      background: linear-gradient(90deg, #FFD700, #FACC15); /* प्रीमियम गोल्ड */
+      height: 20px; /* बहुत पतली और क्लासी */
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      z-index: 100;
+      border: 1px solid #000;
+      box-shadow: 0 4px 15px rgba(250, 204, 21, 0.4);
+      pointer-events: none;
+    }
+
+    /* चमकता हुआ प्रीमियम इफेक्ट */
+    .elite-mini-ticker::after {
+      content: "";
+      position: absolute;
+      top: 0; left: -100%;
+      width: 40%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+      animation: shine 2.5s infinite;
+    }
+
+    @keyframes shine { to { left: 200%; } }
+
+    .ticker-content {
+      display: inline-block;
+      white-space: nowrap;
+      padding-left: 100%;
+      animation: scroll-mini 8s linear infinite; /* थोड़ी तेज स्पीड ताकि छोटा टेक्स्ट जल्दी दिखे */
+      color: #000; 
+      font-size: 9.5px; 
+      font-weight: 900; 
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    @keyframes scroll-mini {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .shaka-controls-container { z-index: 101 !important; }
+    .shaka-spinner-container { display: none !important; }
   </style>  
 </head>  
 <body>  
-  <div class="shaka-video-container" data-shaka-player>  
+
+  <div class="shaka-video-container" data-shaka-player id="video-container">  
+    
+    <div class="elite-mini-ticker">
+      <div class="ticker-content">
+        WATCH MATCHES 100% FREE 🏏🔥
+SEARCH CRICKET YODDHA ON TELEGRAM & JOIN NOW 📲🚀
+      </div>
+    </div>
+
     <video autoplay playsinline preload="metadata" poster="https://i.ibb.co/S4nRbgCN/IMG-20251213-135745.jpg"></video>  
   </div>  
   
   <script>  
     document.addEventListener('DOMContentLoaded', async () => {  
       shaka.polyfill.installAll();  
-  
-      if (!shaka.Player.isBrowserSupported()) {  
-        console.error('Browser not supported');  
-        return;  
-      }  
-  
       const video = document.querySelector('video');  
       const player = new shaka.Player();  
       await player.attach(video);  
-  
-      const container = document.querySelector('.shaka-video-container');  
+      const container = document.getElementById('video-container');  
       const ui = new shaka.ui.Overlay(player, container, video);  
   
       ui.configure({  
-        controlPanelElements: [  
-          'play_pause', 'time_and_duration', 'mute', 'volume',  
-          'spacer', 'language', 'captions', 'picture_in_picture',  
-          'quality', 'fullscreen'  
-        ],  
-        volumeBarColors: {  
-          base: 'rgba(255, 192, 203, 0.3)',  
-          level: 'rgb(255, 105, 180)'
-        },  
-        seekBarColors: {  
-          base: 'rgba(255, 255, 0, 0.3)',  
-          buffered: 'rgba(255, 255, 0, 0.6)',  
-          played: 'rgb(255, 255, 0)'  
-        }  
+        controlPanelElements: ['play_pause', 'spacer', 'quality', 'fullscreen'],
       });  
   
-      // ✅ UPDATED DRM Key (Key ID:Value)
-      let drmConfig = {  
-        clearKeys: {  
-          "1779c27b9d077a3ba0c9cc1bb9a94b9f": "cc5cf3b7928fb9e0a1ee6a8b566f0a8e"  
-        }  
-      };  
-  
-      // ✅ UPDATED MPD URL (Query parameters removed)
-      let streamUrl = "https://a201aivottlinear-a.akamaihd.net/OTTB/lhr-nitro/clients/dash/enc/f60kqesunw/out/v1/a435ed7a00f947deb4369b46d8f2fb70/cenc.mpd";  
-  
-      player.configure({  
-        drm: drmConfig,  
-        streaming: {  
-          lowLatencyMode: true,  
-          bufferingGoal: 15,  
-          rebufferingGoal: 2,  
-          bufferBehind: 15,  
-          retryParameters: {  
-            timeout: 10000,  
-            maxAttempts: 5,  
-            baseDelay: 300,  
-            backoffFactor: 1.2  
-          },  
-          segmentRequestTimeout: 8000,  
-          segmentPrefetchLimit: 2,  
-          useNativeHlsOnSafari: true  
-        },  
-        manifest: {  
-          retryParameters: {  
-            timeout: 8000,  
-            maxAttempts: 3  
-          }  
-        }  
-      });  
-  
-      player.addEventListener('error', (event) => {  
-        console.error('Shaka Player Error:', event.detail);  
+      player.configure({ 
+        drm: { clearKeys: { "1779c27b9d077a3ba0c9cc1bb9a94b9f": "cc5cf3b7928fb9e0a1ee6a8b566f0a8e" } } 
       });  
   
       try {  
-        await player.load(streamUrl);  
-        console.log("Stream loaded successfully");  
-      } catch (error) {  
-        console.error('Load error:', error);  
-      }  
+        await player.load("https://a201aivottlinear-a.akamaihd.net/OTTB/lhr-nitro/clients/dash/enc/f60kqesunw/out/v1/a435ed7a00f947deb4369b46d8f2fb70/cenc.mpd");  
+      } catch (e) { console.error(e); }  
     });  
   </script>  
 </body>  
